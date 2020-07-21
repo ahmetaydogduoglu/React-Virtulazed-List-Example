@@ -1,0 +1,85 @@
+.row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-width: 0px 0px 0.9px 0px;
+  border-color: #c2c2c2;
+  background-color: #f2f2f2;
+  border-style: solid;
+  width: 100%;
+  padding-bottom: 0.1px;
+  height: 35px;
+}
+
+.teams-content-container {
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 88%;
+}
+
+.team-name-text {
+  font-size: 10px;
+  width: 46%;
+  display: flex;
+  color: #131d2d;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.right {
+  align-items: flex-start;
+}
+
+.score-text {
+  margin-left: 1px;
+  margin-right: 1px;
+  color: #5a87b4;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  width: 2.9rem;
+}
+
+.winner-team-text {
+  font-weight: 700;
+}
+
+.score-status-container {
+  width: 12%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play-time-text {
+  font-size: 9px;
+  font-weight: 600;
+  background-color: darkgreen;
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  height: 30%;
+}
+
+.status-text {
+  font-size: 8px;
+  margin: 2px;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  height: 18px;
+  display: flex;
+  color: #d64d49;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+}

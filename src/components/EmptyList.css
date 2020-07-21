@@ -1,0 +1,8 @@
+.empty-list-container{
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#5a87b4 ;
+    font-weight: 800;
+}

@@ -1,0 +1,20 @@
+.type-bar-container {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+  box-sizing: border-box;
+  overflow: auto;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  background-color: #fff;
+  border-color: #5f8fbf;
+  white-space: nowrap;
+}
+.event-typeBar-hidden-container {
+  height: 15;
+  color: #fff;
+  background-color: #fff;
+}

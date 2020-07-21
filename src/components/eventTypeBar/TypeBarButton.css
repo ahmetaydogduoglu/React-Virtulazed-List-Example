@@ -1,0 +1,19 @@
+.type-bar-button {
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1.2px 1.2px 1.2px 1.2px;
+  border-color: #4b7095;
+  margin-right: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #757575;
+  outline: none;
+}
+.activeTypes {
+  background-color: #5f8fbf;
+  color: #fff;
+  border-width: 0px;
+}

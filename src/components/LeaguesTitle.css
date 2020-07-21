@@ -1,0 +1,14 @@
+.league-title-container{
+    height: 25px;
+    width: 100%;
+    margin-top: 0px;
+    background-color: #5F8FBF;
+    display: flex;
+    color: white;
+    font-size: 13px;
+    flex-direction: row;
+    padding-left: 5px;
+    box-sizing: border-box;
+    justify-content: start;
+    align-items: center;
+}

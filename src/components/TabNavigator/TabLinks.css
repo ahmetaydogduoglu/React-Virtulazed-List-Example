@@ -1,0 +1,21 @@
+.link-button {
+  background-color: #fff;
+  border-style: solid;
+  width: 100%;
+  color: #757575;
+  font-weight: 700;
+  padding-right: 20px;
+  font-size: 16px;
+  border-width: 0px;
+  height: 7vh;
+  text-align: center;
+  outline: none;
+}
+.active {
+  border-width: 0px 0px 0.37vh 0px;
+  border-color: #4b7095;
+  color: #5a87b4;
+}
+.link-button-shell {
+  width: 100%;
+}
