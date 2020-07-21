@@ -125,6 +125,16 @@ const LiveResults = () => {
 
   return (
     <div className={"all-result-container"}>
+      <div className={"top-container-all"}>
+        {loading && <Loading message="Sonuçlar Yükleniyor" />}
+        <TabNavigator visible={true} />
+        <SearchBox searchBoxListener={searchBoxListen} />
+        <EventTypesBar
+          events={eventTypes}
+          selectedEventTypes={selectedEventType}
+          selectEventType={selectEventTypes}
+        />
+      </div>
       {!loading && (
         <ScoreList
           setTopBarVisibility={setTopBarVisibility}
@@ -132,17 +142,6 @@ const LiveResults = () => {
           topBarsVisibility={topBarsVisibility}
         />
       )}
-      <div className={"top-container-all"}>
-        {loading && <Loading message="Sonuçlar Yükleniyor" />}
-        <TabNavigator visible={true} />
-
-        <EventTypesBar
-          events={eventTypes}
-          selectedEventTypes={selectedEventType}
-          selectEventType={selectEventTypes}
-        />
-        <SearchBox searchBoxListener={searchBoxListen} />
-      </div>
     </div>
   );
 };

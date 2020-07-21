@@ -5,6 +5,7 @@ import EventTypesBar from "../components/eventTypeBar/TypeBar";
 import Loading from "../components/loadings/resultsLoading";
 import Lists from "../components/Lists/LiveResultsList";
 import SearchBox from "../components/SearchBox/SearchBox";
+import FilterBar from "../components/LiveScoreFilterBar/FilterBar";
 //local file
 import "./LiveResults.css";
 //services
@@ -25,6 +26,7 @@ const LiveResults = () => {
   const [searchText, setSearchText] = useState("");
   const [allLiveResult, setAllLiveResult] = useState({});
   const [selectedEventType, setSelectedEventType] = useState<Object>({});
+  const [topBarsVisibility, setTopBarVisibility] = useState(true);
 
   const onGetLiveResults = () => {
     setLoading(true);
@@ -128,19 +130,28 @@ const LiveResults = () => {
       findEventScores(allLiveResult, eventTypes, findEventIndex);
     }
   }, [searchText]);
-
   return (
     <div className={"live-results-container"}>
-      {liveResults !== null && !loading ? <Lists data={liveResults} /> : null}
-      <div className="top-container">
+      {liveResults !== null && !loading ? (
+        <Lists
+          data={liveResults}
+          setTopBarVisibility={setTopBarVisibility}
+          topBarsVisibility={topBarsVisibility}
+        />
+      ) : null}
+      <div
+        className={
+     "top-container"
+        }
+      >
         {loading && <Loading message="Canlı Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
+        <SearchBox searchBoxListener={searchBoxListen} />
         <EventTypesBar
           events={eventTypes}
           selectEventType={selectEventTypes}
           selectedEventTypes={selectedEventType}
         />
-        <SearchBox searchBoxListener={searchBoxListen} />
       </div>
     </div>
   );

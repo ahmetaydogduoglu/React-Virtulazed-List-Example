@@ -8,13 +8,20 @@ import {
 //components
 import ScoreRow from "../LiveScoreRow";
 import LeagueTitle from "../LeaguesTitle";
-import EmptyList from "../EmptyList";
+import ScoreList from "../Lists/List";
 
-const Lists = ({ data }: { data: Array<any> }) => {
+const Lists = ({
+  data,
+  setTopBarVisibility,
+  topBarsVisibility,
+}: {
+  data: Array<any>;
+  setTopBarVisibility: Function;
+  topBarsVisibility: boolean;
+}) => {
   const [scoreList, setScoreList] = useState<any>([]);
   const [leagueList, setLeagueList] = useState<any>([]);
 
-  const listRef: any = useRef(null);
   const cache = new CellMeasurerCache({
     defaultHeight: 18,
     fixedWidth: true,
@@ -72,21 +79,37 @@ const Lists = ({ data }: { data: Array<any> }) => {
     setLeagueList(leagueList);
     setScoreList(tempArray);
     cache.clearAll(1);
-    listRef.current.recomputeRowHeights(1);
   }, [data[0]]);
+
+  let lastScrollTop = 0;
+  const onScrollList = ({
+    scrollTop,
+  }: {
+    clientHeight: number;
+    scrollHeight: number;
+    scrollTop: number;
+  }) => {
+    const scrollTopHeight: number = scrollTop;
+    if (scrollTopHeight < lastScrollTop) {
+      console.log("truuuuuuu");
+      setTopBarVisibility(true);
+    } else {
+      console.log("falseeeee");
+      setTopBarVisibility(false);
+    }
+    lastScrollTop = scrollTopHeight >= 0 ? scrollTopHeight : 0;
+  };
 
   return (
     <AutoSizer>
       {({ width, height }) => (
-        <List
-          height={height}
-          ref={listRef}
-          width={width}
-          rowCount={scoreList.length}
-          deferredMeasurementCache={cache}
-          rowHeight={cache.rowHeight}
-          noRowsRenderer={EmptyList}
+       
+        <ScoreList
+          cache={cache}
+          data={scoreList}
+          onScrollList={onScrollList}
           rowRenderer={_rowRenderer}
+          size={{ width, height }}
         />
       )}
     </AutoSizer>

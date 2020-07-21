@@ -25,7 +25,7 @@ const ScoreList = ({
 
   return (
     <List
-      height={size.height-20}
+      height={size.height}
       ref={listRef}
       width={size.width}
       rowCount={data.length}
