@@ -3,7 +3,10 @@ import Node from "./Node";
 export default class LinledList {
   private head;
   private lenght;
-
+  constructor() {
+    this.head = null;
+    this.lenght = 0;
+  }
   public append(element) {
     const node = new Node(element);
     let current;

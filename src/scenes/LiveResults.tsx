@@ -34,23 +34,24 @@ const LiveResults = () => {
       .then((result) => {
         let eventTypes: Array<any> = [];
         let groupData: any = {};
-        if (result.liveScores.length !== 0) {
-          //events group
-          groupData = eventGroupMethod(result);
-          setAllLiveResult(groupData);
-          //eventTypesGroup
-          eventTypes = eventTypeMethod(groupData);
-        }
+        // if (result.liveScores.length !== 0) {
+        //   //events group
+        //   groupData = eventGroupMethod(result);
+        //   setAllLiveResult(groupData);
+        //   //eventTypesGroup
+        //   eventTypes = eventTypeMethod(groupData);
+        // }
         //event types sort
         eventTypes = eventTypes.sort(
           (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
         );
-        setEventTypes(eventTypes);
-        setSelectedEventType(eventTypes[0]);
-        findEventScores(groupData, eventTypes, 0);
-        setLoading(false);
+        // setEventTypes(eventTypes);
+        // setSelectedEventType(eventTypes[0]);
+        // findEventScores(groupData, eventTypes, 0);
+        // setLoading(false);
       })
       .catch((err) => {
+        console.log(err);
         setLoading(false);
       });
   };
@@ -139,11 +140,7 @@ const LiveResults = () => {
           topBarsVisibility={topBarsVisibility}
         />
       ) : null}
-      <div
-        className={
-     "top-container"
-        }
-      >
+      <div className={"top-container"}>
         {loading && <Loading message="Canlı Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
         <SearchBox searchBoxListener={searchBoxListen} />
