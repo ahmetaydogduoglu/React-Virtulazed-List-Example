@@ -5,11 +5,11 @@ type Idata = {
 export default (data: Idata) => {
   return data.liveScores.reduce(function (
     obj,
-    { eventTypeName, eventType, leagueName, leagueCode,countryName, ...item }
+    { eventTypeName, eventType, leagueName, leagueCode, countryName, ...item }
   ) {
     const key = `${eventType}-${eventTypeName}-${leagueCode}-${countryName}`;
     obj[key] = obj[key] || {
-      eventType,  
+      eventType,
       eventTypeName,
       leagueName,
       leagueCode,

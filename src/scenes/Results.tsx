@@ -26,6 +26,7 @@ const LiveResults = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedEventType, setSelectedEventType] = useState<Object>({});
   const [topBarsVisibility, setTopBarVisibility] = useState(true);
+  
   const onGetAllResults = () => {
     setLoading(true);
     getAllResults("/score-list")

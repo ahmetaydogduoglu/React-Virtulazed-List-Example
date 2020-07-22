@@ -1,4 +1,11 @@
 import { apiUrl } from "../constants/apiUrl";
+interface responseInterface<T1, T2, T3, T4> {
+  code: T1;
+  liveScores: T2;
+  message: T3;
+  status: T4;
+}
+
 export default (
   endpoint: string,
   method: string,
@@ -11,8 +18,15 @@ export default (
       body,
     })
       .then((repsonse) => {
-        resolve(repsonse.json());
+        return repsonse.json();
       })
+      .then(
+        (
+          response: responseInterface<number, Array<Object>, string, string>
+        ) => {
+          resolve(response);
+        }
+      )
       .catch((err) => reject(err));
   });
   return doRequest;
