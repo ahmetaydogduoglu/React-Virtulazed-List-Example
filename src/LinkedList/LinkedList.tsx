@@ -22,11 +22,26 @@ export default class LinledList {
     this.lenght += 1;
   }
 
-  public toString() {
+  public getNodes() {
     let current = this.head;
+    let linkedItems: Array<Object> = [];
     while (current) {
-      console.log(current.element);
+      linkedItems.push(current);
       current = current.next;
     }
+    return linkedItems;
+  }
+
+  public findNode(eventNumber: Number) {
+    let current = this.head;
+    let searchNode: Object = {};
+    while (current) {
+      if (current.eventType === eventNumber) {
+        searchNode = current;
+        break;
+      }
+      current = current.next;
+    }
+    return searchNode;
   }
 }
