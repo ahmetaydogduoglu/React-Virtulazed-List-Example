@@ -3,7 +3,6 @@ import { FaFutbol, FaBasketballBall, FaVolleyballBall } from "react-icons/fa";
 
 function selectIcon(key) {
   let icon: any = null;
-  console.log(key);
   switch (parseInt(key)) {
     case 1:
       icon = <FaFutbol size={18} />;

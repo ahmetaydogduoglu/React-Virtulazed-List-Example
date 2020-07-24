@@ -1,5 +1,5 @@
 type Idata = {
-  liveScores: Array<any>;
+  liveScores:any;
 };
 interface IeventTypeList {
   eventType: string;

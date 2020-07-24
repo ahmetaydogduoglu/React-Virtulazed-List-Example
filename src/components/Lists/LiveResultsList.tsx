@@ -91,10 +91,8 @@ const Lists = ({
   }) => {
     const scrollTopHeight: number = scrollTop;
     if (scrollTopHeight < lastScrollTop) {
-      console.log("truuuuuuu");
       setTopBarVisibility(true);
     } else {
-      console.log("falseeeee");
       setTopBarVisibility(false);
     }
     lastScrollTop = scrollTopHeight >= 0 ? scrollTopHeight : 0;

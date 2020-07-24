@@ -30,31 +30,36 @@ export default (
         (
           response: responseInterface<number, Array<Object>, string, string>
         ) => {
-          const groupedScroes = groupScore(response);
-          let scoresEventList: Array<any> = [];
-          groupedScroes.eventTypeList.forEach((item, index) => {
-            const result = Object.keys(groupedScroes.groupedData).filter(
-              function (key) {
-                return key[0] === item.eventType.toString();
-              }
-            );
-            if (
-              scoresEventList.findIndex(
-                (event) => event.eventType === item.eventType
-              ) === -1
-            ) {
-              let scores: Array<Object> = [];
-              result.forEach((key) => {
-                scores.push(groupedScroes.groupedData[key]);
-              });
-              scoresEventList.push({
-                ...item,
-                scores,
-              });
-            }
-            newLinkedList.append(scoresEventList[index]);
-            resolve(newLinkedList);
-          });
+          // const groupedScroes = groupScore(response);
+          // let scoresEventList: Array<any> = [];
+          // const sortedEvent = groupedScroes.eventTypeList.sort(
+          //   (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
+          // );
+          // sortedEvent.forEach((item, index) => {
+          //   const result = Object.keys(groupedScroes.groupedData).filter(
+          //     function (key) {
+          //       const splitedKey = key.split("-");
+          //       return splitedKey[0].toString() === item.eventType.toString();
+          //     }
+          //   );
+          //   if (
+          //     scoresEventList.findIndex(
+          //       (event) =>
+          //         event.eventType.toString() === item.eventType.toString()
+          //     ) === -1
+          //   ) {
+          //     let scores: Array<Object> = [];
+          //     result.forEach((key) => {
+          //       scores.push(groupedScroes.groupedData[key]);
+          //     });
+          //     scoresEventList.push({
+          //       ...item,
+          //       scores,
+          //     });
+          //   }
+          //   // newLinkedList.append(scoresEventList[index]);
+          // });
+          resolve(response);
         }
       )
       .catch((err) => reject(err));

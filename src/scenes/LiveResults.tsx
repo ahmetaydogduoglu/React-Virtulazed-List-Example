@@ -18,6 +18,8 @@ import eventTypeMethod from "../GroupMethods/eventTypesMethod";
 //object for searchbox listener
 const searchBoxListen = new SearchBoxListener();
 
+const linkedListScores: Object = {};
+
 const LiveResults = () => {
   //states
   const [liveResults, setLiveResults] = useState<any>(null);
@@ -32,8 +34,10 @@ const LiveResults = () => {
     setLoading(true);
     getLiveResult("/get-live-event-scores")
       .then((result) => {
-        let eventTypes: Array<any> = [];
-        let groupData: any = {};
+        console.log("asasdsadsad");
+
+        // let eventTypes: Array<any> = [];
+        // let groupData: any = {};
         // if (result.liveScores.length !== 0) {
         //   //events group
         //   groupData = eventGroupMethod(result);
@@ -42,16 +46,16 @@ const LiveResults = () => {
         //   eventTypes = eventTypeMethod(groupData);
         // }
         //event types sort
-        eventTypes = eventTypes.sort(
-          (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
-        );
+        // eventTypes = eventTypes.sort(
+        //   (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
+        // );
         // setEventTypes(eventTypes);
         // setSelectedEventType(eventTypes[0]);
         // findEventScores(groupData, eventTypes, 0);
         // setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err)
         setLoading(false);
       });
   };
@@ -131,6 +135,7 @@ const LiveResults = () => {
       findEventScores(allLiveResult, eventTypes, findEventIndex);
     }
   }, [searchText]);
+
   return (
     <div className={"live-results-container"}>
       {liveResults !== null && !loading ? (
