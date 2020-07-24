@@ -4,7 +4,7 @@ import "./TypeBarButton.css";
 type eventTypeTypes = {
   eventType: String;
   eventName: String;
-  eventTypeCount: String;
+  scoresLenght: Number;
 };
 
 export default function TypeBarButton({
@@ -26,7 +26,7 @@ export default function TypeBarButton({
       onClick={() => selectEventType(eventType.eventType)}
     >
       {eventType.eventName[0].toUpperCase() + eventType.eventName.slice(1)} (
-      {eventType.eventTypeCount})
+      {eventType.scoresLenght})
     </button>
   );
 }

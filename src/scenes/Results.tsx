@@ -26,27 +26,21 @@ const LiveResults = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedEventType, setSelectedEventType] = useState<Object>({});
   const [topBarsVisibility, setTopBarVisibility] = useState(true);
-  
+
   const onGetAllResults = () => {
     setLoading(true);
     getAllResults("/score-list")
-      .then((results) => {
-        let eventTypes: Array<any> = [];
-        let groupData: any = {};
-        if (results.liveScores.length !== 0) {
-          //events group
-          groupData = eventGroupMethod(results);
-          setAllResults(groupData);
-          //eventTypesGroup
-          eventTypes = eventTypeMethod(groupData);
-        }
-        //event types sort
-        eventTypes = eventTypes.sort(
+      .then((results: any) => {
+        console.log(results);
+        setAllResults(results.groupedData);
+
+        // event types sort
+        const sortedEventTypes = results.eventTypeList.sort(
           (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
         );
-        setEventTypes(eventTypes);
-        setSelectedEventType(eventTypes[0]);
-        findEventScores(groupData, eventTypes, 0);
+        setEventTypes(sortedEventTypes);
+        setSelectedEventType(sortedEventTypes[0]);
+        findEventScores(results.groupedData, sortedEventTypes, 0);
         setLoading(false);
       })
       .catch((err) => {
@@ -113,7 +107,7 @@ const LiveResults = () => {
     let scoreList: Array<any> = [];
     Object.keys(allResultObject).forEach((key) => {
       const keys = key.split("-");
-      if (keys[0] === types[selectedEvent].eventType) {
+      if (keys[0] === types[selectedEvent].eventType.toString()) {
         scoreList.push(allResultObject[key]);
       }
     });

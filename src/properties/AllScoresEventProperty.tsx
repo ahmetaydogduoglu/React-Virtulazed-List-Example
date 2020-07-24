@@ -1,5 +1,4 @@
-interface ILiveEventProprty {
-  awayScore: String;
+interface IAllScoreProperty {
   awayTeamName: String;
   code: Number;
   countryName: String;
@@ -8,29 +7,29 @@ interface ILiveEventProprty {
   eventId: Number;
   eventType: Number;
   eventTypeName: String;
-  homeScore: String;
   homeTeamName: String;
-  id: Number;
   isFavorite: Boolean;
   isInCoupon: Boolean;
   isLiveEvent: Boolean;
   leagueCode: String;
   leagueName: String;
   leaguePriority: Number;
+  bettingPhase: Number;
+  bettingStatus: Number;
   mbc: Number;
-  parts: Array<Object>;
-  playTime: Number;
-  score: String;
-  status: String;
-  statusCode: Number;
+  detail: Array<any>;
+  eventClosedCombination: Array<any>;
+  eventName: String;
+  eventState: String;
+  eventVersion: Number;
+  sgUniqueId: Number;
 }
 
-export default class LiveEventProperty implements ILiveEventProprty {
+export default class AllScoresProperty implements IAllScoreProperty {
   constructor(event) {
     this.setPropertyValues(event);
   }
 
-  public awayScore;
   public awayTeamName;
   public code;
   public countryName;
@@ -39,9 +38,7 @@ export default class LiveEventProperty implements ILiveEventProprty {
   public eventId;
   public eventType;
   public eventTypeName;
-  public homeScore;
   public homeTeamName;
-  public id;
   public isFavorite;
   public isInCoupon;
   public isLiveEvent;
@@ -49,14 +46,16 @@ export default class LiveEventProperty implements ILiveEventProprty {
   public leagueName;
   public leaguePriority;
   public mbc;
-  public parts: Array<Object> = [];
-  public playTime;
-  public score;
-  public status;
-  public publicstatusCode;
-  public statusCode;
+  public sgUniqueId;
+  public eventVersion;
+  public eventState;
+  public detail: Array<Object>  = [];
+  public bettingPhase;
+  public bettingStatus;
+  public eventClosedCombination= [];
+  public eventName;
+
   public setPropertyValues(event) {
-    this.awayScore = event.awayScore;
     this.awayTeamName = event.awayTeamName;
     this.code = event.code;
     this.countryName = event.countryName;
@@ -64,9 +63,7 @@ export default class LiveEventProperty implements ILiveEventProprty {
     this.eventId = event.eventId;
     this.eventType = event.eventType;
     this.eventTypeName = event.eventTypeName;
-    this.homeScore = event.homeScore;
     this.homeTeamName = event.homeTeamName;
-    this.id = event.id;
     this.isFavorite = event.isFavorite;
     this.isInCoupon = event.isInCoupon;
     this.isLiveEvent = event.isLiveEvent;
@@ -74,32 +71,45 @@ export default class LiveEventProperty implements ILiveEventProprty {
     this.leagueName = event.leagueName;
     this.leaguePriority = event.leaguePriority;
     this.mbc = event.mbc;
-    if (Array.isArray(event.parts)) {
-      event.parts.map((item) => {
-        this.parts.push(new MatchPartProperties(item));
-      });
-    }
-    this.playTime = event.playTime;
-    this.score = event.score;
-    this.status = event.status;
-    this.statusCode = event.statusCode;
+
+    // event.detail.forEach((item) => {
+    //   this.detail.push(new MatchDetailpProperty(item));
+    // });
   }
 }
 
-class MatchPartProperties {
+class MatchDetailpProperty {
   constructor(part) {
     this.setPropertyValues(part);
   }
 
-  public awayScore = null;
-  public homeScore = null;
-  public part = undefined;
-  public score = undefined;
+  public away_score;
+  public created_at;
+  public deleted_at;
+  public event_id;
+  public home_score;
+  public id;
+  public part_number;
+  public is_cancelled;
+  public revision;
+  public part_score;
+  public type_no;
+  public score_result;
+  public updated_at;
 
   public setPropertyValues(part) {
-    this.awayScore = part.awayScore;
-    this.homeScore = part.homeScore;
-    this.part = part.part;
-    this.score = part.score;
+    this.away_score = part.away_score;
+    this.created_at = part.created_at;
+    this.deleted_at = part.deleted_at;
+    this.event_id = part.event_id;
+    this.home_score = part.home_score;
+    this.id = part.id;
+    this.part_number = part.part_number;
+    this.is_cancelled = part.is_cancelled;
+    this.revision = part.revision;
+    this.type_no = part.type_no;
+    this.score_result = part.score_result;
+    this.updated_at = part.updated_at;
+    this.part_score = part.part_score;
   }
 }

@@ -18,7 +18,10 @@ import eventTypeMethod from "../GroupMethods/eventTypesMethod";
 //object for searchbox listener
 const searchBoxListen = new SearchBoxListener();
 
-const linkedListScores: Object = {};
+interface Iresult<T1, T2> {
+  eventTypeList: T1;
+  groupedData: T2;
+}
 
 const LiveResults = () => {
   //states
@@ -33,29 +36,19 @@ const LiveResults = () => {
   const onGetLiveResults = () => {
     setLoading(true);
     getLiveResult("/get-live-event-scores")
-      .then((result) => {
-        console.log("asasdsadsad");
-
-        // let eventTypes: Array<any> = [];
-        // let groupData: any = {};
-        // if (result.liveScores.length !== 0) {
-        //   //events group
-        //   groupData = eventGroupMethod(result);
-        //   setAllLiveResult(groupData);
-        //   //eventTypesGroup
-        //   eventTypes = eventTypeMethod(groupData);
-        // }
-        //event types sort
-        // eventTypes = eventTypes.sort(
-        //   (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
-        // );
-        // setEventTypes(eventTypes);
-        // setSelectedEventType(eventTypes[0]);
-        // findEventScores(groupData, eventTypes, 0);
-        // setLoading(false);
+      .then((result: any) => {
+        let sortedEventTypes = result.eventTypeList.sort(
+          (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
+        );
+        console.log(sortedEventTypes);
+        setAllLiveResult(result.groupedData);
+        setEventTypes(sortedEventTypes);
+        setSelectedEventType(sortedEventTypes[0]);
+        findEventScores(result.groupedData, sortedEventTypes, 0);
+        setLoading(false);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setLoading(false);
       });
   };
@@ -69,7 +62,7 @@ const LiveResults = () => {
     let scoreList: Array<any> = [];
     Object.keys(allResultObject).forEach((key) => {
       const keys = key.split("-");
-      if (keys[0] === types[selectedEvent].eventType) {
+      if (keys[0] === types[selectedEvent].eventType.toString()) {
         scoreList.push(allResultObject[key]);
       }
     });
