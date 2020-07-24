@@ -5,23 +5,16 @@ import EventTypesBar from "../components/eventTypeBar/TypeBar";
 import Loading from "../components/loadings/resultsLoading";
 import Lists from "../components/Lists/LiveResultsList";
 import SearchBox from "../components/SearchBox/SearchBox";
-import FilterBar from "../components/LiveScoreFilterBar/FilterBar";
 //local file
 import "./LiveResults.css";
 //services
 import getLiveResult from "../services/getLiveResults";
 //listener
 import SearchBoxListener from "../searchBoxListen/SearchBoxListen";
-//groupMethods
-import eventGroupMethod from "../GroupMethods/eventMethod";
-import eventTypeMethod from "../GroupMethods/eventTypesMethod";
+//branchChangeObject
+import listenBranchChange from "../BranchChange/BranchChangeListen";
 //object for searchbox listener
 const searchBoxListen = new SearchBoxListener();
-
-interface Iresult<T1, T2> {
-  eventTypeList: T1;
-  groupedData: T2;
-}
 
 const LiveResults = () => {
   //states
@@ -40,12 +33,16 @@ const LiveResults = () => {
         let sortedEventTypes = result.eventTypeList.sort(
           (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
         );
-        console.log(sortedEventTypes);
         setAllLiveResult(result.groupedData);
+        //change branch set
+    
         setEventTypes(sortedEventTypes);
         setSelectedEventType(sortedEventTypes[0]);
-        findEventScores(result.groupedData, sortedEventTypes, 0);
         setLoading(false);
+        listenBranchChange.setBranches({
+          branches: sortedEventTypes,
+          selectedBranches: sortedEventTypes[0].eventType,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -71,15 +68,6 @@ const LiveResults = () => {
     } else {
       setLiveResults(scoreList);
     }
-  };
-
-  //event typse select with typeBar
-  const selectEventTypes = (types) => {
-    const findEventIndex = eventTypes.findIndex(
-      (item) => item.eventType === types
-    );
-    setSelectedEventType(eventTypes[findEventIndex]);
-    findEventScores(allLiveResult, eventTypes, findEventIndex);
   };
 
   //search with team name
@@ -116,6 +104,26 @@ const LiveResults = () => {
     onGetLiveResults();
   }, []);
 
+  //listen branchChange
+  useEffect(() => {
+    listenBranchChange
+      .getBranchesContent()
+      .subscribe(
+        (content: { branches: Array<any>; selectedBranches: number }) => {
+          if (content.branches ) {
+            const findEventIndex = content.branches.findIndex(
+              (item) => parseInt(item.eventType) === content.selectedBranches
+            );
+            if (findEventIndex !== -1) {
+              findEventScores(allLiveResult, content.branches, findEventIndex);
+            }
+          }else{
+            listenBranchChange.clearBranches();
+          }
+        }
+      );
+  }, [allLiveResult]);
+
   //searchMethod
   useEffect(() => {
     if (searchText.trim().length > 2) {
@@ -144,7 +152,6 @@ const LiveResults = () => {
         <SearchBox searchBoxListener={searchBoxListen} />
         <EventTypesBar
           events={eventTypes}
-          selectEventType={selectEventTypes}
           selectedEventTypes={selectedEventType}
         />
       </div>

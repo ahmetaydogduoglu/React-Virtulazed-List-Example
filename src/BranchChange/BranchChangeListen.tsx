@@ -1,35 +1,31 @@
-import { Observable } from "rxjs";
+import { Subject } from "rxjs";
 
-interface IListenBranchChange {
-  _selectedBranches: Number;
-  _branches: Array<Object>;
-  changeBranches(branch): void;
+interface IBranchListen {
+  setBranches(conent: {
+    branches: Array<Object>;
+    selectedBranches: Number;
+  }): void;
+  getBranchesContent(): any;
+  clearBranches(): void;
 }
 
-class ListenBranchChange implements IListenBranchChange {
-  private _branches;
-  private _selectedBranches;
-
+class BranchChangeListen implements IBranchListen {
+  private listenSubject: any;
   constructor() {
-    this._branches = [];
-    this._selectedBranches = 0;
+    this.listenSubject = new Subject();
   }
-
-  public changeBranches = (branch: Number): void => {
-    this._selectedBranches(branch);
-  };
-
-  public get branches(): string {
-    return this._branches;
+  setBranches(content): void {
+    const { branches, selectedBranches } = content;
+    this.listenSubject.next({ branches, selectedBranches });
   }
-
-  public set branches(value: string) {
-    this._branches = value;
+  getBranchesContent(): any {
+    return this.listenSubject.asObservable();
   }
-
-  public get selectedBranches(): string {
-    return this._selectedBranches;
+  clearBranches(): void {
+    this.listenSubject.next();
   }
 }
 
-const listenBranchChange = new ListenBranchChange();
+const listenBranchChange = new BranchChangeListen();
+
+export default listenBranchChange;

@@ -15,7 +15,6 @@ export default function getAllResults(endpoint: string): Promise<Object> {
       getMethod(endpoint, "")
         .then((response: responseProperty) => {
           const linkedList = new LinkedList();
-          console.log(response.liveScores[0])
           response.liveScores.map((event) => {
             const eventProperty = new AllScoresProperty(event);
             linkedList.append(eventProperty);

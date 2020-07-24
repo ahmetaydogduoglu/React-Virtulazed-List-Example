@@ -124,11 +124,11 @@ const LiveResults = () => {
         {loading && <Loading message="Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
         <SearchBox searchBoxListener={searchBoxListen} />
-        <EventTypesBar
+        {/* <EventTypesBar
           events={eventTypes}
           selectedEventTypes={selectedEventType}
           selectEventType={selectEventTypes}
-        />
+        /> */}
       </div>
       {!loading && (
         <ScoreList

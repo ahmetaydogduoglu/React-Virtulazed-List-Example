@@ -10,16 +10,16 @@ type eventTypeTypes = {
 export default function TypeBarButton({
   eventType,
   selectEventType,
-  selectedEventTypes,
+  selectedEventType,
 }: {
   eventType: eventTypeTypes;
   selectEventType: Function;
-  selectedEventTypes: any;
+  selectedEventType: any;
 }) {
   return (
     <button
       className={
-        selectedEventTypes.eventType === eventType.eventType
+        selectedEventType === eventType.eventType
           ? "type-bar-button activeTypes"
           : "type-bar-button"
       }
