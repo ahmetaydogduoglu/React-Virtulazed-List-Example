@@ -30,19 +30,20 @@ const LiveResults = () => {
     setLoading(true);
     getLiveResult("/get-live-event-scores")
       .then((result: any) => {
-        let sortedEventTypes = result.eventTypeList.sort(
-          (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
-        );
-        setAllLiveResult(result.groupedData);
-        //change branch set
-    
-        setEventTypes(sortedEventTypes);
-        setSelectedEventType(sortedEventTypes[0]);
+        if (Object.keys(result).length === 0) {
+          alert("Canlı Sonuç Yok.");
+          setLiveResults([]);
+        } else {
+          setAllLiveResult(result.groupedData);
+          //change branch set
+          setEventTypes(result.eventTypeList);
+          setSelectedEventType(result.eventTypeList[0]);
+          listenBranchChange.setBranches({
+            branches: result.eventTypeList,
+            selectedBranches: result.eventTypeList[0].eventType,
+          });
+        }
         setLoading(false);
-        listenBranchChange.setBranches({
-          branches: sortedEventTypes,
-          selectedBranches: sortedEventTypes[0].eventType,
-        });
       })
       .catch((err) => {
         console.log(err);
@@ -110,14 +111,14 @@ const LiveResults = () => {
       .getBranchesContent()
       .subscribe(
         (content: { branches: Array<any>; selectedBranches: number }) => {
-          if (content.branches ) {
+          if (content.branches) {
             const findEventIndex = content.branches.findIndex(
               (item) => parseInt(item.eventType) === content.selectedBranches
             );
             if (findEventIndex !== -1) {
               findEventScores(allLiveResult, content.branches, findEventIndex);
             }
-          }else{
+          } else {
             listenBranchChange.clearBranches();
           }
         }
@@ -149,7 +150,10 @@ const LiveResults = () => {
       <div className={"top-container"}>
         {loading && <Loading message="Canlı Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
-        <SearchBox searchBoxListener={searchBoxListen} />
+        {liveResults !== null ||
+          (liveResults !== [] && (
+            <SearchBox searchBoxListener={searchBoxListen} />
+          ))}
         <EventTypesBar
           events={eventTypes}
           selectedEventTypes={selectedEventType}

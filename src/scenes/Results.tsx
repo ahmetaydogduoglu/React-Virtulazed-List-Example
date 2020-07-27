@@ -8,11 +8,11 @@ import SearchBox from "../components/SearchBox/SearchBox";
 
 //services
 import getAllResults from "../services/getAllResults";
-//groupMethods
-import eventGroupMethod from "../GroupMethods/eventMethod";
-import eventTypeMethod from "../GroupMethods/eventTypesMethod";
 //listener
 import SearchBoxListener from "../searchBoxListen/SearchBoxListen";
+
+import listenBranchChange from "../BranchChange/BranchChangeListen";
+
 //local file
 import "./Results.css";
 
@@ -31,9 +31,7 @@ const LiveResults = () => {
     setLoading(true);
     getAllResults("/score-list")
       .then((results: any) => {
-        console.log(results);
         setAllResults(results.groupedData);
-
         // event types sort
         const sortedEventTypes = results.eventTypeList.sort(
           (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
@@ -42,6 +40,10 @@ const LiveResults = () => {
         setSelectedEventType(sortedEventTypes[0]);
         findEventScores(results.groupedData, sortedEventTypes, 0);
         setLoading(false);
+        listenBranchChange.setBranches({
+          branches: sortedEventTypes,
+          selectedBranches: sortedEventTypes[0].eventType,
+        });
       })
       .catch((err) => {
         setLoading(false);
@@ -91,13 +93,24 @@ const LiveResults = () => {
     }
   }, [searchText]);
 
-  const selectEventTypes = (types) => {
-    const findEventIndex = eventTypes.findIndex(
-      (item) => item.eventType === types
-    );
-    setSelectedEventType(eventTypes[findEventIndex]);
-    findEventScores(allResults, eventTypes, findEventIndex);
-  };
+  useEffect(() => {
+    listenBranchChange
+      .getBranchesContent()
+      .subscribe(
+        (content: { branches: Array<any>; selectedBranches: number }) => {
+          if (content.branches) {
+            const findEventIndex = content.branches.findIndex(
+              (item) => parseInt(item.eventType) === content.selectedBranches
+            );
+            if (findEventIndex !== -1) {
+              findEventScores(allResults, content.branches, findEventIndex);
+            }
+          } else {
+            listenBranchChange.clearBranches();
+          }
+        }
+      );
+  }, [allResults]);
 
   const findEventScores = (
     allResultObject: Object,
@@ -124,11 +137,10 @@ const LiveResults = () => {
         {loading && <Loading message="Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
         <SearchBox searchBoxListener={searchBoxListen} />
-        {/* <EventTypesBar
+        <EventTypesBar
           events={eventTypes}
           selectedEventTypes={selectedEventType}
-          selectEventType={selectEventTypes}
-        /> */}
+        />
       </div>
       {!loading && (
         <ScoreList

@@ -38,8 +38,11 @@ export default (data: Idata) => {
     return obj;
   },
   {});
+  const sortedEventTypeList =eventTypeList.sort(
+    (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
+  );
   return {
     groupedData,
-    eventTypeList,
+    eventTypeList:sortedEventTypeList,
   };
 };

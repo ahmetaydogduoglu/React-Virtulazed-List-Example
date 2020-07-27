@@ -15,12 +15,17 @@ export default function getLiveResult(endpoint: string): Promise<Object> {
       getMethod(endpoint, "")
         .then((response: responseProperty) => {
           const linkedList = new LinkedList();
-          response.liveScores.map((event) => {
-            const eventProperty = new LiveEventProperty(event);
-            linkedList.append(eventProperty);
-          });
-          const groupedDate = groupData(response);
-          resolve(groupedDate);
+          console.log(response);
+          if (response.liveScores !== null) {
+            response.liveScores.map((event) => {
+              const eventProperty = new LiveEventProperty(event);
+              linkedList.append(eventProperty);
+            });
+            const groupedDate = groupData(response);
+            resolve(groupedDate);
+          }
+          //if live scores is null Resolve object send {}
+          resolve({});
         })
         .catch((err) => {
           reject(err);
