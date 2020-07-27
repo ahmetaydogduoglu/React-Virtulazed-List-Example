@@ -6,8 +6,8 @@ import Router from "react-router-dom/BrowserRouter";
 import Switch from "react-router-dom/Switch";
 import Redirect from "react-router-dom/Redirect";
 //scenes
-import LiveResults from "./scenes/LiveResults";
-import Results from "./scenes/Results";
+import LiveResults from "./UI/scenes/LiveResults";
+import Results from "./UI/scenes/Results";
 
 function App() {
   return (

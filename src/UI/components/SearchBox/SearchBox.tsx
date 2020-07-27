@@ -7,13 +7,14 @@ type typeSearchBoxListener = {
   sendMessage: Function;
   getMessage: Function;
 };
+
 export default function SearchBox({
   searchBoxListener,
 }: {
   searchBoxListener: typeSearchBoxListener;
 }) {
   const [searchText, setSearchText] = useState("");
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     searchBoxListener.sendMessage(e.target.value);
     setSearchText(e.target.value);
   };

@@ -8,11 +8,11 @@ import SearchBox from "../components/SearchBox/SearchBox";
 //local file
 import "./LiveResults.css";
 //services
-import getLiveResult from "../services/getLiveResults";
+import getLiveResult from "../../services/getLiveResults";
 //listener
-import SearchBoxListener from "../searchBoxListen/SearchBoxListen";
+import SearchBoxListener from "../../searchBoxListen/SearchBoxListen";
 //branchChangeObject
-import listenBranchChange from "../BranchChange/BranchChangeListen";
+import listenBranchChange from "../../BranchChange/BranchChangeListen";
 //object for searchbox listener
 const searchBoxListen = new SearchBoxListener();
 
@@ -150,14 +150,13 @@ const LiveResults = () => {
       <div className={"top-container"}>
         {loading && <Loading message="Canlı Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
-        {liveResults !== null ||
-          (liveResults !== [] && (
-            <SearchBox searchBoxListener={searchBoxListen} />
-          ))}
         <EventTypesBar
           events={eventTypes}
           selectedEventTypes={selectedEventType}
         />
+        {liveResults !== null && (
+          <SearchBox searchBoxListener={searchBoxListen} />
+        )}
       </div>
     </div>
   );

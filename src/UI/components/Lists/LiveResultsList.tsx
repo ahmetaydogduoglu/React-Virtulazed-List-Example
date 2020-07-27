@@ -3,7 +3,7 @@ import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 //components
 import ScoreRow from "../LiveScoreRow";
 import LeagueTitle from "../LeaguesTitle";
-import ScoreList from "../Lists/List";
+import ScoreList from "./List";
 
 const Lists = ({
   data,

@@ -7,12 +7,10 @@ import ScoreList from "../components/Lists/AllResultList";
 import SearchBox from "../components/SearchBox/SearchBox";
 
 //services
-import getAllResults from "../services/getAllResults";
+import getAllResults from "../../services/getAllResults";
 //listener
-import SearchBoxListener from "../searchBoxListen/SearchBoxListen";
-
-import listenBranchChange from "../BranchChange/BranchChangeListen";
-
+import SearchBoxListener from "../../searchBoxListen/SearchBoxListen";
+import listenBranchChange from "../../BranchChange/BranchChangeListen";
 //local file
 import "./Results.css";
 

@@ -2,7 +2,7 @@ import React from "react";
 //localFiles
 import "./LeaguesTitle.css";
 //icons
-import selectIcon from "../UI/Icons/SelectIcon";
+import selectIcon from "../Icons/SelectIcon";
 type leagueTitleType = {
   leagueName: String;
   countryName: String;
