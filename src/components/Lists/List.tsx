@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { List, AutoSizer } from "react-virtualized";
+import { List } from "react-virtualized";
 //components
 import EmptyList from "../EmptyList";
 type listTypes = {

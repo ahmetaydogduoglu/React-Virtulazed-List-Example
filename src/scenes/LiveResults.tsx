@@ -46,7 +46,7 @@ const LiveResults = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        alert("Bir Sorun Oluştu");
         setLoading(false);
       });
   };

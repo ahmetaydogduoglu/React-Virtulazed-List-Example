@@ -25,11 +25,11 @@ export default function TypeBar({
       if (content.branches) {
         setBranches(content.branches);
         setSelectedBranch(content.selectedBranches);
-      }else{
+      } else {
         listenBranchChange.clearBranches();
       }
-    });      
-  });
+    });
+  }, []);
   const selectBranch = (branchType: number) => {
     listenBranchChange.setBranches({
       branches: branches,

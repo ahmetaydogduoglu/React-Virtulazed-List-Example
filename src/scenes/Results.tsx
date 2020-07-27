@@ -31,21 +31,23 @@ const LiveResults = () => {
     setLoading(true);
     getAllResults("/score-list")
       .then((results: any) => {
-        setAllResults(results.groupedData);
-        // event types sort
-        const sortedEventTypes = results.eventTypeList.sort(
-          (a, b) => parseInt(a.eventType) - parseInt(b.eventType)
-        );
-        setEventTypes(sortedEventTypes);
-        setSelectedEventType(sortedEventTypes[0]);
-        findEventScores(results.groupedData, sortedEventTypes, 0);
+        if (Object.keys(results).length === 0) {
+          alert("Hiç Sonuç Yok.");
+        } else {
+          setAllResults(results.groupedData);
+          // event types sort
+          setEventTypes(results.eventTypeList);
+          setSelectedEventType(results.eventTypeList[0]);
+          findEventScores(results.groupedData, results.eventTypeList, 0);
+          listenBranchChange.setBranches({
+            branches: results.eventTypeList,
+            selectedBranches: results.eventTypeList[0].eventType,
+          });
+        }
         setLoading(false);
-        listenBranchChange.setBranches({
-          branches: sortedEventTypes,
-          selectedBranches: sortedEventTypes[0].eventType,
-        });
       })
       .catch((err) => {
+        alert("Bir Sorun Oluştu");
         setLoading(false);
       });
   };

@@ -1,10 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import {
-  AutoSizer,
-  List,
-  CellMeasurer,
-  CellMeasurerCache,
-} from "react-virtualized";
+import React, { useEffect, useState } from "react";
+import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 //components
 import ScoreRow from "../LiveScoreRow";
 import LeagueTitle from "../LeaguesTitle";
@@ -101,7 +96,6 @@ const Lists = ({
   return (
     <AutoSizer>
       {({ width, height }) => (
-       
         <ScoreList
           cache={cache}
           data={scoreList}

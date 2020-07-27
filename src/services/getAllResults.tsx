@@ -15,12 +15,15 @@ export default function getAllResults(endpoint: string): Promise<Object> {
       getMethod(endpoint, "")
         .then((response: responseProperty) => {
           const linkedList = new LinkedList();
-          response.liveScores.map((event) => {
-            const eventProperty = new AllScoresProperty(event);
-            linkedList.append(eventProperty);
-          });
-          const groupedDate = groupData(response);
-          resolve(groupedDate);
+          if (response.liveScores !== null) {
+            response.liveScores.map((event) => {
+              const eventProperty = new AllScoresProperty(event);
+              linkedList.append(eventProperty);
+            });
+            const groupedDate = groupData(response);
+            resolve(groupedDate);
+          }
+          resolve({})
         })
         .catch((err) => {
           reject(err);
