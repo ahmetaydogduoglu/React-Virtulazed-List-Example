@@ -1,28 +1,28 @@
 interface ILiveEventProprty {
-  awayScore: String;
-  awayTeamName: String;
-  code: Number;
-  countryName: String;
-  eventDate: Date;
-  eventDatetimeStamp: Number;
-  eventId: Number;
-  eventType: Number;
-  eventTypeName: String;
-  homeScore: String;
-  homeTeamName: String;
-  id: Number;
-  isFavorite: Boolean;
-  isInCoupon: Boolean;
-  isLiveEvent: Boolean;
-  leagueCode: String;
-  leagueName: String;
-  leaguePriority: Number;
-  mbc: Number;
-  parts: Array<Object>;
-  playTime: Number;
-  score: String;
-  status: String;
-  statusCode: Number;
+  _awayScore: String;
+  _awayTeamName: String;
+  _code: Number;
+  _countryName: String;
+  _eventDate: Date;
+  _eventDatetimeStamp: Number;
+  _eventId: Number;
+  _eventType: Number;
+  _eventTypeName: String;
+  _homeScore: String;
+  _homeTeamName: String;
+  _id: Number;
+  _isFavorite: Boolean;
+  _isInCoupon: Boolean;
+  _isLiveEvent: Boolean;
+  _leagueCode: String;
+  _leagueName: String;
+  _leaguePriority: Number;
+  _mbc: Number;
+  _parts: Array<Object>;
+  _playTime: Number;
+  _score: String;
+  _status: String;
+  _statusCode: Number;
 }
 
 export default class LiveEventProperty implements ILiveEventProprty {
@@ -30,59 +30,59 @@ export default class LiveEventProperty implements ILiveEventProprty {
     this.setPropertyValues(event);
   }
 
-  public awayScore;
-  public awayTeamName;
-  public code;
-  public countryName;
-  public eventDate;
-  public eventDatetimeStamp;
-  public eventId;
-  public eventType;
-  public eventTypeName;
-  public homeScore;
-  public homeTeamName;
-  public id;
-  public isFavorite;
-  public isInCoupon;
-  public isLiveEvent;
-  public leagueCode;
-  public leagueName;
-  public leaguePriority;
-  public mbc;
-  public parts: Array<Object> = [];
-  public playTime;
-  public score;
-  public status;
-  public publicstatusCode;
-  public statusCode;
+  public _awayScore;
+  public _awayTeamName;
+  public _code;
+  public _countryName;
+  public _eventDate;
+  public _eventDatetimeStamp;
+  public _eventId;
+  public _eventType;
+  public _eventTypeName;
+  public _homeScore;
+  public _homeTeamName;
+  public _id;
+  public _isFavorite;
+  public _isInCoupon;
+  public _isLiveEvent;
+  public _leagueCode;
+  public _leagueName;
+  public _leaguePriority;
+  public _mbc;
+  public _parts: Array<Object> = [];
+  public _playTime;
+  public _score;
+  public _status;
+  public _publicstatusCode;
+  public _statusCode;
   public setPropertyValues(event) {
-    this.awayScore = event.awayScore;
-    this.awayTeamName = event.awayTeamName;
-    this.code = event.code;
-    this.countryName = event.countryName;
-    this.eventDatetimeStamp = event.eventDatetimeStamp;
-    this.eventId = event.eventId;
-    this.eventType = event.eventType;
-    this.eventTypeName = event.eventTypeName;
-    this.homeScore = event.homeScore;
-    this.homeTeamName = event.homeTeamName;
-    this.id = event.id;
-    this.isFavorite = event.isFavorite;
-    this.isInCoupon = event.isInCoupon;
-    this.isLiveEvent = event.isLiveEvent;
-    this.leagueCode = event.leagueCode;
-    this.leagueName = event.leagueName;
-    this.leaguePriority = event.leaguePriority;
-    this.mbc = event.mbc;
+    this._awayScore = event.awayScore;
+    this._awayTeamName = event.awayTeamName;
+    this._code = event.code;
+    this._countryName = event.countryName;
+    this._eventDatetimeStamp = event.eventDatetimeStamp;
+    this._eventId = event.eventId;
+    this._eventType = event.eventType;
+    this._eventTypeName = event.eventTypeName;
+    this._homeScore = event.homeScore;
+    this._homeTeamName = event.homeTeamName;
+    this._id = event.id;
+    this._isFavorite = event.isFavorite;
+    this._isInCoupon = event.isInCoupon;
+    this._isLiveEvent = event.isLiveEvent;
+    this._leagueCode = event.leagueCode;
+    this._leagueName = event.leagueName;
+    this._leaguePriority = event.leaguePriority;
+    this._mbc = event.mbc;
     if (Array.isArray(event.parts)) {
       event.parts.map((item) => {
-        this.parts.push(new MatchPartProperties(item));
+        this._parts.push(new MatchPartProperties(item));
       });
     }
-    this.playTime = event.playTime;
-    this.score = event.score;
-    this.status = event.status;
-    this.statusCode = event.statusCode;
+    this._playTime = event.playTime;
+    this._score = event.score;
+    this._status = event.status;
+    this._statusCode = event.statusCode;
   }
 }
 
@@ -91,15 +91,15 @@ class MatchPartProperties {
     this.setPropertyValues(part);
   }
 
-  public awayScore = null;
-  public homeScore = null;
-  public part = undefined;
-  public score = undefined;
+  public _awayScore = null;
+  public _homeScore = null;
+  public _part = undefined;
+  public _score = undefined;
 
   public setPropertyValues(part) {
-    this.awayScore = part.awayScore;
-    this.homeScore = part.homeScore;
-    this.part = part.part;
-    this.score = part.score;
+    this._awayScore = part.awayScore;
+    this._homeScore = part.homeScore;
+    this._part = part.part;
+    this._score = part.score;
   }
 }
