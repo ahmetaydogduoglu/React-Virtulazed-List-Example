@@ -10,7 +10,7 @@ import SearchBox from "../components/SearchBox/SearchBox";
 import getAllResults from "../../services/getAllResults";
 //listener
 import SearchBoxListener from "../../searchBoxListen/SearchBoxListen";
-import listenBranchChange from "../../BranchChange/BranchChangeListen";
+import listenBranchChange from "../../branchChange/BranchChangeListen";
 //local file
 import "./Results.css";
 
@@ -85,7 +85,8 @@ const LiveResults = () => {
     if (searchText.trim().length > 2) {
       const tempLiveResult = [...results];
       searchTeamName(searchText, tempLiveResult);
-    } else {
+    }
+    else {
       const findEventIndex = eventTypes.findIndex(
         (item) => item === selectedEventType
       );
@@ -103,6 +104,7 @@ const LiveResults = () => {
               (item) => parseInt(item.eventType) === content.selectedBranches
             );
             if (findEventIndex !== -1) {
+              setSelectedEventType(content.branches[findEventIndex]);
               findEventScores(allResults, content.branches, findEventIndex);
             }
           } else {
@@ -136,11 +138,11 @@ const LiveResults = () => {
       <div className={"top-container-all"}>
         {loading && <Loading message="Sonuçlar Yükleniyor" />}
         <TabNavigator visible={true} />
-        <SearchBox searchBoxListener={searchBoxListen} />
         <EventTypesBar
           events={eventTypes}
           selectedEventTypes={selectedEventType}
         />
+        <SearchBox searchBoxListener={searchBoxListen} />
       </div>
       {!loading && (
         <ScoreList

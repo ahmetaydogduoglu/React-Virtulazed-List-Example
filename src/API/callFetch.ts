@@ -1,7 +1,5 @@
 import { apiUrl } from "../constants/apiUrl";
-import LinkedList from "../LinkedList/LinkedList";
-import groupScore from "../GroupMethods/eventMethod";
-import ScoreList from "../UI/components/Lists/List";
+import LinkedList from "../linkedList/LinkedList";
 
 interface responseInterface<T1, T2, T3, T4> {
   code: T1;

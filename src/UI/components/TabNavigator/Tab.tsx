@@ -13,7 +13,7 @@ type tabProps = {
 export default function Tab({ visible }: tabProps) {
   return (
     <div className={"tab-container"}>
-      <TabLink pathName="/sonuclar/canliSonuclar" name="Canlı Sonuçlar" />
+      <TabLink pathName="/canliSonuclar" name="Canlı Sonuçlar" />
       <TabLink pathName="/sonuclar" name="Sonuçlar" />
     </div>
   );

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 //localFiles
 import "./LeaguesTitle.css";
 //icons
-import selectIcon from "../Icons/SelectIcon";
+import SelectIcon from "../Icons/SelectIcon";
 type leagueTitleType = {
   leagueName: String;
   countryName: String;
@@ -11,9 +11,10 @@ type leagueTitleType = {
 
 function LeaguesTitle({ leagueName, countryName, eventType }: leagueTitleType) {
   // const Icon = selectIcon(eventType);
+  const Icon = SelectIcon(eventType)
   return (
     <div className="league-title-container">
-      {/* <Icon /> */}
+      <Icon />
       <p>
         {countryName} - {leagueName}
       </p>

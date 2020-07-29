@@ -22,7 +22,9 @@ export default function rowRenderer({ content }: { content: any }) {
         >
           {content.homeTeamName}
         </p>
-        <p className="full-time-score-text">{fullTimeScore.home_score}-{fullTimeScore.away_score}</p>
+        <p className="full-time-score-text">
+          {fullTimeScore.home_score}-{fullTimeScore.away_score}
+        </p>
         <p
           className={
             fullTimeScore.home_score < fullTimeScore.away_score

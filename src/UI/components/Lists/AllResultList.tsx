@@ -1,9 +1,5 @@
-import React, {  useEffect, useState } from "react";
-import {
-  CellMeasurer,
-  CellMeasurerCache,
-  AutoSizer,
-} from "react-virtualized";
+import React, { useEffect, useState } from "react";
+import { CellMeasurer, CellMeasurerCache, AutoSizer } from "react-virtualized";
 //local flies
 import "./AllResultList.css";
 //components

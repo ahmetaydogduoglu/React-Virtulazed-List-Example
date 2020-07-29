@@ -1,7 +1,7 @@
 import { getMethod } from "../API/methods";
-import LinkedList from "../LinkedList/LinkedList";
+import LinkedList from "../linkedList/LinkedList";
 import LiveEventProperty from "../properties/LiveEventProperty";
-import groupData from "../GroupMethods/eventMethod";
+import groupData from "../groupMethods/eventMethod";
 
 interface responseProperty {
   liveScores: Array<any>;
@@ -9,6 +9,7 @@ interface responseProperty {
   code: Number;
   message: String;
 }
+
 export default function getLiveResult(endpoint: string): Promise<Object> {
   const getLiveResultPromise: Promise<Object> = new Promise(
     (resolve, reject) => {

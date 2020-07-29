@@ -42,6 +42,7 @@ export default class AllScoresProperty implements IAllScoreProperty {
   public isFavorite;
   public isInCoupon;
   public isLiveEvent;
+  b;
   public leagueCode;
   public leagueName;
   public leaguePriority;
@@ -49,10 +50,10 @@ export default class AllScoresProperty implements IAllScoreProperty {
   public sgUniqueId;
   public eventVersion;
   public eventState;
-  public detail: Array<Object>  = [];
+  public detail: Array<Object> = [];
   public bettingPhase;
   public bettingStatus;
-  public eventClosedCombination= [];
+  public eventClosedCombination = [];
   public eventName;
 
   public setPropertyValues(event) {

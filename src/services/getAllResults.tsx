@@ -1,7 +1,7 @@
 import { getMethod } from "../API/methods";
-import LinkedList from "../LinkedList/LinkedList";
+import LinkedList from "../linkedList/LinkedList";
 import AllScoresProperty from "../properties/AllScoresEventProperty";
-import groupData from "../GroupMethods/eventMethod";
+import groupData from "../groupMethods/eventMethod";
 interface responseProperty {
   liveScores: Array<any>;
   status: String;

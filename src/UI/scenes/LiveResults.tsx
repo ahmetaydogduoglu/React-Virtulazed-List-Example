@@ -12,7 +12,7 @@ import getLiveResult from "../../services/getLiveResults";
 //listener
 import SearchBoxListener from "../../searchBoxListen/SearchBoxListen";
 //branchChangeObject
-import listenBranchChange from "../../BranchChange/BranchChangeListen";
+import listenBranchChange from "../../branchChange/BranchChangeListen";
 //object for searchbox listener
 const searchBoxListen = new SearchBoxListener();
 
@@ -28,11 +28,12 @@ const LiveResults = () => {
 
   const onGetLiveResults = () => {
     setLoading(true);
+
     getLiveResult("/get-live-event-scores")
       .then((result: any) => {
         if (Object.keys(result).length === 0) {
           alert("Canlı Sonuç Yok.");
-          setLiveResults([]);
+          setLiveResults(null);
         } else {
           setAllLiveResult(result.groupedData);
           //change branch set
@@ -67,6 +68,7 @@ const LiveResults = () => {
     if (searchText.trim().length > 2) {
       searchTeamName(searchText, scoreList);
     } else {
+      console.log("list:", scoreList);
       setLiveResults(scoreList);
     }
   };
@@ -107,34 +109,34 @@ const LiveResults = () => {
 
   //listen branchChange
   useEffect(() => {
-    listenBranchChange
-      .getBranchesContent()
-      .subscribe(
-        (content: { branches: Array<any>; selectedBranches: number }) => {
-          if (content.branches) {
-            const findEventIndex = content.branches.findIndex(
-              (item) => parseInt(item.eventType) === content.selectedBranches
-            );
-            if (findEventIndex !== -1) {
-              findEventScores(allLiveResult, content.branches, findEventIndex);
+    if (Object.keys(allLiveResult).length !== 0) {
+      listenBranchChange
+        .getBranchesContent()
+        .subscribe(
+          (content: { branches: Array<any>; selectedBranches: number }) => {
+            if (content.branches) {
+              const findEventIndex = content.branches.findIndex(
+                (item) => parseInt(item.eventType) === content.selectedBranches
+              );
+              setSelectedEventType(content.branches[findEventIndex]);
+              if (findEventIndex !== -1) {
+                findEventScores(
+                  allLiveResult,
+                  content.branches,
+                  findEventIndex
+                );
+              }
             }
-          } else {
-            listenBranchChange.clearBranches();
           }
-        }
-      );
+        );
+    }
   }, [allLiveResult]);
 
   //searchMethod
   useEffect(() => {
-    if (searchText.trim().length > 2) {
+    if (searchText.length > 2) {
       const tempLiveResult = [...liveResults];
       searchTeamName(searchText, tempLiveResult);
-    } else {
-      const findEventIndex = eventTypes.findIndex(
-        (item) => item === selectedEventType
-      );
-      findEventScores(allLiveResult, eventTypes, findEventIndex);
     }
   }, [searchText]);
 

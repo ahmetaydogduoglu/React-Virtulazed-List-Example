@@ -4,7 +4,7 @@ import "./TypeBar.css";
 //components
 import TypeBarButton from "./TypeBarButton";
 //BranchChangeListen
-import listenBranchChange from "../../../BranchChange/BranchChangeListen";
+import listenBranchChange from "../../../branchChange/BranchChangeListen";
 
 interface IContent {
   branches: Array<Object>;

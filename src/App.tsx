@@ -14,13 +14,13 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Redirect from="/" to="/sonuclar" />
+          <Redirect from="/" to="/canliSonuclar" />
+        </Route>
+        <Route path="/canliSonuclar" exact>
+          <LiveResults />
         </Route>
         <Route path="/sonuclar" exact>
           <Results />
-        </Route>
-        <Route path="/sonuclar/canliSonuclar" exact>
-          <LiveResults />
         </Route>
         <Route path="*">
           <div>404</div>
