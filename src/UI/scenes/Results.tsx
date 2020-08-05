@@ -85,8 +85,7 @@ const LiveResults = () => {
     if (searchText.trim().length > 2) {
       const tempLiveResult = [...results];
       searchTeamName(searchText, tempLiveResult);
-    }
-    else {
+    } else {
       const findEventIndex = eventTypes.findIndex(
         (item) => item === selectedEventType
       );
