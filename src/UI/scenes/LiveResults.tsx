@@ -28,10 +28,8 @@ const LiveResults = () => {
 
   const onGetLiveResults = () => {
     setLoading(true);
-
     getLiveResult("/get-live-event-scores")
       .then((result: any) => {
-        console.log("result", result);
         if (!result.groupedData) {
           alert("Canlı Sonuç Yok.");
           setLiveResults(null);
@@ -48,7 +46,6 @@ const LiveResults = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         alert("Bir Sorun Oluştu");
         setLoading(false);
       });
