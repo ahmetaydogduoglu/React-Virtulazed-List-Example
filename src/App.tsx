@@ -10,7 +10,7 @@ import LiveResults from "./UI/scenes/LiveResults";
 import Results from "./UI/scenes/Results";
 
 function App() {
-  console.log("naberr");
+  console.log("naberr 123");
   return (
     <Router>
       <Switch>
